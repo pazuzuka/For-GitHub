@@ -3,28 +3,14 @@
 #include <cstdlib>
 #include <ctime>
 #include <stack>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
 const int WALL = 1;
 const int PATH = 0;
 const int GIFT = 2;
-
-//Ну что бы было)
-void just()
-{
-    int a = 2, b = 0;
-    int c = a / b;
-    try
-    {
-        cout << c;
-    }
-    catch (const exception&)
-    {
-        exception;
-    }
-}
-
 
 void generateMaze(int rows, int cols, vector<vector<int>>& maze, pair<int, int>& giftLocation) {
     stack<pair<int, int>> cells;
@@ -48,7 +34,7 @@ void generateMaze(int rows, int cols, vector<vector<int>>& maze, pair<int, int>&
         {
             neighbors.push_back({ row + 2, col });
         }
-        if (col >= 3 && maze[row][col - 2] == WALL) 
+        if (col >= 3 && maze[row][col - 2] == WALL)
         {
             neighbors.push_back({ row, col - 2 });
         }
@@ -115,10 +101,10 @@ void player(int& playerRows, int& playerColumns, int rows, int columns, char gam
 int main() {
     char gamer = '@';
     int playerRows = 1, playerColumns = 1;
-    pair<int, int> giftLocation; // Переменная для хранения координат подарка
+    pair<int, int> giftLocation;
     int rows = 25, columns = 50;
 
-    vector<vector<int>> maze(rows, vector<int>(columns, WALL)); // Создаем лабиринт с заполненными стенами
+    vector<vector<int>> maze(rows, vector<int>(columns, WALL));
 
     srand(time(nullptr));
 
@@ -129,6 +115,8 @@ int main() {
     while (!foundGift)
     {
         player(playerRows, playerColumns, rows, columns, gamer, maze, giftLocation);
+
+        system("cls");
 
         for (int i = 0; i < rows; i++)
         {
@@ -165,8 +153,9 @@ int main() {
             cout << "Congratulations! You found a gift!" << endl;
             foundGift = true;
         }
+
+        this_thread::sleep_for(chrono::milliseconds(10));
     }
 
-    just();
     return 0;
 }
