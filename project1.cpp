@@ -10,6 +10,22 @@ const int WALL = 1;
 const int PATH = 0;
 const int GIFT = 2;
 
+//Ну что бы было)
+void just()
+{
+    int a = 2, b = 0;
+    int c = a / b;
+    try
+    {
+        cout << c;
+    }
+    catch (const exception&)
+    {
+        exception;
+    }
+}
+
+
 void generateMaze(int rows, int cols, vector<vector<int>>& maze, pair<int, int>& giftLocation) {
     stack<pair<int, int>> cells;
     cells.push({ 1, 1 });
@@ -151,5 +167,6 @@ int main() {
         }
     }
 
+    just();
     return 0;
 }
